@@ -47,17 +47,27 @@ public class Account {
     }
 
     public void deposit(Double amount){
-        this.balance += amount;
+        balance += amount;
 
     }
 
     public void withDraw(Double amount) throws AccountException{
-        if (balance <= 0){
-            throw new AccountException("Insufficient balance for withdrawal.");
+        if (withdrawLimit < amount){
+            throw new AccountException("Insufficient withdrawal.");
         }
         if (balance < amount){
             throw new AccountException("Withdrawal amount greater than balance.");
         }
-        this.balance -= amount;
+        balance -= amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "number=" + number +
+                ", holder='" + holder + '\'' +
+                ", initial balance=" + balance +
+                ", withdrawLimit=" + withdrawLimit +
+                '}';
     }
 }
